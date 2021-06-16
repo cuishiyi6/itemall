@@ -65,6 +65,7 @@ export class UserController {
 
 
   @Post('modify')
+  @ApiOperation({summary:'用户修改'})
   @UsePipes(EncryptPipe)
   @UseInterceptors(FileInterceptor('avatar'))
   @UseGuards(AuthGuard)

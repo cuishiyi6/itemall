@@ -10,5 +10,5 @@ export enum JWTConstant{
 }
 
 export  enum  LIMIT{
-  PAGE_SIZE =30
+  PAGE_SIZE = 30
 }
