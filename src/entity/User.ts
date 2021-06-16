@@ -1,11 +1,6 @@
-import {
-  Column,
-  CreateDateColumn, Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
-import { UpdateCommand } from '@nestjs/cli/commands/update.command';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
+
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -13,7 +8,7 @@ export class User {
 
   @ApiProperty()
   @Column({ comment: '手机号' })
-  phone: string
+  phone: string;
 
   @ApiProperty()
   @Column({ comment: '密码' })
@@ -31,9 +26,9 @@ export class User {
   @Column({ comment: '昵称' })
   nickName: string;
 
-  
   @CreateDateColumn({ comment: '注册时间' })
   createDatetime: Date;
+
   @UpdateDateColumn({ comment: '修改时间' })
   updateDatetime: Date;
   @Column({ comment: '头像' })

@@ -15,7 +15,7 @@ export class UserService {
   ) {
   }
 
-  发送验证码;
+  //发送验证码;
 
   async sendCode(body): Promise<string> {
     const isExist = await this.findOne({ phone: body.phone })
@@ -59,20 +59,15 @@ const token = this.jwt.sign({id:loginUser.id,phone:loginUser.phone});
 }
 //修改
   async modify(user:User):Promise<string>{
-    console.log(user);
-    const id = parseInt(String(user.id))
-    let update_user = user
-    delete update_user.id
-    try {
-      const res = await  this.userRepository.query("update user set? where id = ?",[user,id])
-    }catch (err){
-      console.log(err);
+   if (typeof user.id==='string')user.id = parseInt(String(user.id));
+   const {updateDatetime} = await this.userRepository.save(user);
+   if (updateDatetime)return "修改成功";
+   throw new ForbiddenException('修改失败');
     }
-    return
   }
 
 
-}
+
 
 
 

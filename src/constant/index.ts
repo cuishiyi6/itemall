@@ -8,3 +8,7 @@ export enum JWTConstant{
   secret = 'itemall',
   expiresIn = '7d'
 }
+
+export  enum  LIMIT{
+  PAGE_SIZE =30
+}

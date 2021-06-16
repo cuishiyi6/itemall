@@ -1,2 +1,5 @@
 //统一导出
-export {sendCode} from './sms'
+import { from } from 'rxjs';
+
+export { sendCode } from './sms';
+export { upload } from './upload';
