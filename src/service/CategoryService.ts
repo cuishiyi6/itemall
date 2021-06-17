@@ -20,7 +20,8 @@ export class CategoryService{
   }
 
   //查询列表
-  async querySubCategory():Promise<Subcategory[]>{
-    return this.subcategoryRepository.find();
+  async querySubcategory(maitKey:{}):Promise<Subcategory[]>{
+    return this.subcategoryRepository.find({where:maitKey})
   }
+
 }

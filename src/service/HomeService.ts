@@ -25,7 +25,7 @@ export class HomeService{
 
   //查询商品数据
   async  queryGoods(type = 'pop',page = 1):Promise<Goods[]>{
-    const skip = (page - 1)*LIMIT.PAGE_SIZE;
+    const skip = (page - 1)*LIMIT.PAGE_SIZE;  
     return await this.goodsRepository.find({
       where:{type},
       skip,

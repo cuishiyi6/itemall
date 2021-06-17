@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Query } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { Category } from "../entity/Category";
 import { Subcategory } from "../entity/Subcategory";
@@ -21,7 +21,7 @@ export class CategoryController{
     summary: "查询分类列表"
   })
   @Get('sub')
-  async querySubcategory(): Promise<Subcategory[]> {
-    return this.service.querySubCategory();
+  async querySubcategory(@Query() maitKey:{}): Promise<Subcategory[]> {
+    return this.service.querySubcategory(maitKey);
   }
 }
