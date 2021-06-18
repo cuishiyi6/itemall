@@ -13,4 +13,7 @@ export class Subcategory {
 
   @Column("varchar", { name: "link", nullable: true, length: 255 })
   link: string | null;
+
+  @Column("varchar", { name: "maitKey", nullable: true, length: 255 })
+  maitKey:string
 }
