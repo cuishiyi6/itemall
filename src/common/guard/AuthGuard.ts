@@ -12,7 +12,8 @@ export class AuthGuard  implements  CanActivate{
     try {
       let token = request.headers["authorization"]
       token = token.replace('Bearer ','')
-      const auth_user = this.jwt.verify(token)
+      const {id} = this.jwt.verify(token)
+      context.switchToHttp().getRequest().auth_user = id
     }catch (err){
       throw new UnauthorizedException('未授权')
     }

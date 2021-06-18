@@ -15,7 +15,7 @@ export class HomeController{
   })
   @Get()
   async queryHome():Promise<Object>{
-    return this.service.queryHome;
+    return this.service.queryHome();
   }
   @ApiOperation({
     summary: "请求商品的数据"
