@@ -61,8 +61,7 @@ export class CartService {
   /**
    * 查询商品是否存在
    */
-  async queryOne(where):Promise<Cart | undefined>{
-    return await this.cartRepository.findOne({where:where,select:['id']});
+  async queryOne(where): Promise<Cart | undefined> {
+    return await this.cartRepository.findOne({ where: where, select: ['id'] });
   }
 }
-

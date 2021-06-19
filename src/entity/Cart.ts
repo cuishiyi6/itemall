@@ -1,10 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import {User} from './User';
-import { Goods } from "./Goods";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './User';
+import { Goods } from './Goods';
 
 @Entity()
 export class Cart {
-
   @PrimaryGeneratedColumn()
   id: string;
 
@@ -16,5 +15,4 @@ export class Cart {
 
   @Column()
   num: number;
-
 }

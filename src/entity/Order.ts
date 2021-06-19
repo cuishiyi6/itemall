@@ -1,32 +1,44 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryColumn,
+} from 'typeorm';
+import { OrderDesc } from './OrderDesc';
+import { ORDER_STATUS } from '../constant';
 
 @Entity()
 export class Order {
-
   @PrimaryColumn()
-  id:string
+  id: string;
 
   @CreateDateColumn()
-  createDateTime:Date
+  createDateTime: Date;
 
-  @Column({nullable:true})
-  endDateTime:Date
-
-  @Column({
-    default:0,
-    comment:'0待付款 1 已完成 2取消'
-  })
-  status:number
+  @Column({ nullable: true })
+  endDateTime: Date;
 
   @Column({
-    type:"double",
-    nullable:true
+    default: ORDER_STATUS.INIT,
+    comment: '0待付款 1 已完成 2取消',
   })
-  totalPrice:number
+  status: number;
+
+  @Column({
+    type: 'double',
+    nullable: true,
+  })
+  totalPrice: number;
 
   @Column()
-  uid:number
+  uid: number;
 
   @Column()
-  address:string
+  address: string;
+
+  @DeleteDateColumn()
+  delDatetime: Date;
+
+  orderDesc: OrderDesc[];
 }
