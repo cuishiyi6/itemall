@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class OrderDesc {
@@ -11,7 +11,7 @@ export class OrderDesc {
   @Column()
   title: string;
 
-  @Column({ type: "double", name: "price", nullable: true})
+  @Column({ type: 'double', name: 'price', nullable: true })
   price: number | null;
 
   @Column({ length: 1000 })
@@ -19,5 +19,4 @@ export class OrderDesc {
 
   @Column()
   num: number;
-
 }

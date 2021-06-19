@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './AppModule';
-import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
-import { Resultintercepotor } from "./common/interceptor/Resultintercepotor";
-import { AllExceptionFilter } from "./common/filter/ExceptionFilter";
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { Resultintercepotor } from './common/interceptor/Resultintercepotor';
+import { AllExceptionFilter } from './common/filter/ExceptionFilter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,9 +12,9 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-  app.useGlobalInterceptors(new Resultintercepotor())
+  app.useGlobalInterceptors(new Resultintercepotor());
 
-  app.useGlobalFilters(new AllExceptionFilter())
+  app.useGlobalFilters(new AllExceptionFilter());
   await app.listen(3000);
 }
 bootstrap();
