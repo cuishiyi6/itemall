@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-
+import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { UserModule } from './module/UserModule';
@@ -7,6 +7,7 @@ import { HomeModule } from './module/HomeModule';
 import { CategoryModule } from './module/CategoryModule';
 import { CartModule } from './module/CartModule';
 import { OrderModule } from './module/OrderModule';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   //注入数据库模块
@@ -20,6 +21,9 @@ import { OrderModule } from './module/OrderModule';
     TypeOrmModule.forRootAsync({
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), { autoLoadEntities: true }),
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '../dist', 'upload'),
     }),
   ],
 })
