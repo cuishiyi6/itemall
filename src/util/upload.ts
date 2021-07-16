@@ -9,15 +9,10 @@ export const upload = (file): string => {
   } catch (err) {
     fs.mkdir(dir, () => console.log('文件创建成功'));
   }
-
-  const path = join(
-    __dirname,
-    '..',
-    'upload',
-    nanoid() + extname(file.originalname),
-  );
+  const fileName = nanoid() + extname(file.originalname);
+  const path = join(__dirname, '..', 'upload', fileName);
   const writeStream = fs.createWriteStream(path);
   writeStream.write(file.buffer);
   writeStream.close();
-  return path;
+  return 'http://127.0.0.1:3000/' + fileName;
 };

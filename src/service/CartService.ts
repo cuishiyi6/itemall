@@ -35,17 +35,16 @@ export class CartService {
    * 添加
    */
   async save(body, uid): Promise<string> {
-    if (body.uid !== uid) throw new UnauthorizedException('非法操作');
     const id = await this.queryOne({ uid, gid: body.gid });
     if (id) {
       const { affected } = await this.cartRepository.update(id, {
         num: body.num,
       });
-      return affected === 0 ? '修改失败' : '修改成功';
+      return affected === 0 ? '添加失败' : '添加购物车成功';
     }
     await this.cartRepository.save(body);
 
-    return body.id ? '新增成功' : '新增失败';
+    return body.id ? '添加购物车成功' : '添加购物车失败';
   }
 
   /**

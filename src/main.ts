@@ -13,9 +13,11 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
+  //跨域
   app.enableCors();
-  app.useStaticAssets('upload');
+  //全局拦截器=>处理成功操作
   app.useGlobalInterceptors(new Resultintercepotor());
+  //全局异常过滤器 =>失败操作，或者异常问题
   app.useGlobalFilters(new AllExceptionFilter());
   await app.listen(3000);
 }

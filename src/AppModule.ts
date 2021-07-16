@@ -1,5 +1,4 @@
 import { Module } from '@nestjs/common';
-import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
 import { UserModule } from './module/UserModule';
@@ -8,6 +7,7 @@ import { CategoryModule } from './module/CategoryModule';
 import { CartModule } from './module/CartModule';
 import { OrderModule } from './module/OrderModule';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   //注入数据库模块
