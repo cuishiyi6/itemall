@@ -22,11 +22,11 @@ export class CartService {
     //查询当前用户的购物车记录中的商品gid
     const gid = await this.cartRepository.find({
       where: uid,
-      select: ['gid', 'num'],
+      select: ['gid', 'num', 'id'],
     });
     for (const item of gid) {
       const goods = await this.goodsRepository.findOne(item.gid);
-      goodList.push({ goods, num: item.num });
+      goodList.push({ id: item.id, goods, num: item.num });
     }
     return goodList;
   }
@@ -51,8 +51,8 @@ export class CartService {
    * 删除
    */
   async del(id, uid): Promise<string> {
-    id = await this.queryOne({ uid, id });
-    if (!id) throw new UnauthorizedException('非法操作');
+    //id = await this.queryOne({ uid, id });
+    //if (!id) throw new UnauthorizedException('非法操作');
     const { affected } = await this.cartRepository.delete(id);
     return affected === 0 ? '删除失败' : '删除成功';
   }
