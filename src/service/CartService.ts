@@ -2,7 +2,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Goods } from '../entity/Goods';
-import { query } from 'express';
 import { Cart } from '../entity/Cart';
 
 @Injectable()
@@ -50,7 +49,7 @@ export class CartService {
   /**
    * 删除
    */
-  async del(id, uid): Promise<string> {
+  async del(id): Promise<string> {
     //id = await this.queryOne({ uid, id });
     //if (!id) throw new UnauthorizedException('非法操作');
     const { affected } = await this.cartRepository.delete(id);

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Query,
+  Req,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../common/guard/AuthGuard';
 import { OrderService } from '../service/OrderService';
@@ -49,5 +57,13 @@ export class OrderController {
   @Post('del')
   async del(@Body() body, @Req() req): Promise<string> {
     return this.service.del(body, req.auth_user);
+  }
+
+  @ApiOperation({
+    summary: '根据订单id查询',
+  })
+  @Get('queryOne')
+  async queryById(@Query('id') id: number): Promise<Order> {
+    return this.service.queryById(id);
   }
 }

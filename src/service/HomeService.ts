@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Query } from '@nestjs/common';
 import { Banner } from '../entity/Banner';
 import { Repository } from 'typeorm';
 import { Goods } from '../entity/Goods';
@@ -40,5 +40,9 @@ export class HomeService {
   //根据iid查询商品的详情
   async queryDetail(iid: string): Promise<Detail> {
     return await this.detailRepository.findOne({ iid });
+  }
+
+  async queryGoodsById(id: number[]): Promise<Goods[]> {
+    return await this.goodsRepository.findByIds(id);
   }
 }

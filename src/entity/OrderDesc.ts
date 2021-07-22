@@ -15,7 +15,7 @@ export class OrderDesc {
   price: number | null;
 
   @Column({ length: 1000 })
-  img: string;
+  show: string;
 
   @Column()
   num: number;

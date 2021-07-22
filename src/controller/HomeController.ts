@@ -31,4 +31,11 @@ export class HomeController {
   async queryDetail(@Query('iid') iid: string): Promise<Detail> {
     return this.service.queryDetail(iid);
   }
+  @ApiOperation({
+    summary: '根据id查询商品',
+  })
+  @Get('/good')
+  async queryGoodsById(@Query('id') id: number[]): Promise<Goods[]> {
+    return this.service.queryGoodsById(id);
+  }
 }

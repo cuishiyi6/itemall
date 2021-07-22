@@ -40,7 +40,7 @@ export class CartController {
     summary: '删除购物车',
   })
   @Delete()
-  async del(@Body('id') id, @Req() req): Promise<string> {
-    return this.service.del(id, req.auth_user);
+  async del(@Body('id') id): Promise<string> {
+    return this.service.del(id);
   }
 }
