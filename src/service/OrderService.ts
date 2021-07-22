@@ -19,6 +19,8 @@ export class OrderService {
 
   /**
    * 添加订单
+   * @param body
+   * @param userId
    */
   async save(body, userId): Promise<string> {
     let totalPrice = 0;
@@ -49,10 +51,14 @@ export class OrderService {
 
   /**
    * 查询订单
+   * @param body
+   * @param uid
    */
   async query(body, uid): Promise<Order[]> {
     // 创建QueryBuilder
-    const db = this.orderRepository.createQueryBuilder('order');
+    const db = this.orderRepository
+      .createQueryBuilder('order')
+      .orderBy('order.id', 'DESC');
     // 判断body中是否有开始时间和结束时间
     if (body.startTime && body.endTime) {
       const { startTime, endTime } = body;
@@ -78,8 +84,10 @@ export class OrderService {
 
   /**
    * 取消订单
+   * @param body
+   * @param req
    */
-  async modify(body, uid): Promise<string> {
+  async modify(body): Promise<string> {
     const { id } = body;
     const { affected } = await this.orderRepository.update(id, {
       status: ORDER_STATUS.CANCEL,
@@ -89,6 +97,8 @@ export class OrderService {
 
   /**
    * 支付订单
+   * @param body
+   * @param uid
    */
   async pay(body, uid): Promise<string> {
     //id 修改状态 为1
@@ -105,13 +115,14 @@ export class OrderService {
 
   /**
    * 删除订单
-   * 物理删除：真实在数据库进行删除操作，delete
-   * 逻辑删除：在逻辑层面上进行删除，update
+   * @param body
+   * @param uid
    */
-  async del(body, uid): Promise<string> {
+  async del(body): Promise<string> {
     const { id } = await this.orderRepository.softRemove({ id: body.id });
     return id ? '删除成功' : '删除失败';
   }
+
   /**
    * 根据订单id查询
    * @param id

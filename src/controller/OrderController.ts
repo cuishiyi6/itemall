@@ -3,19 +3,19 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Query,
   Req,
   UseGuards,
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AuthGuard } from '../common/guard/AuthGuard';
 import { OrderService } from '../service/OrderService';
-import { query } from 'express';
+import { AuthGuard } from '../common/guard/AuthGuard';
 import { Order } from '../entity/Order';
 
 @ApiTags('订单')
 @UseGuards(AuthGuard)
-@Controller('oder')
+@Controller('order')
 export class OrderController {
   constructor(private readonly service: OrderService) {}
 
@@ -26,21 +26,20 @@ export class OrderController {
   async save(@Body() body, @Req() req): Promise<string> {
     return this.service.save(body, req.auth_user);
   }
-
   @ApiOperation({
     summary: '查询订单',
   })
   @Get()
-  async query(@Body() body, @Req() req): Promise<Order[]> {
-    return this.service.query(body, req.auth_user);
+  async query(@Query() query, @Req() req): Promise<Order[]> {
+    return this.service.query(query, req.auth_user);
   }
 
   @ApiOperation({
     summary: '取消订单',
   })
   @Post('cancel')
-  async modify(@Body() body, @Req() req): Promise<string> {
-    return this.service.modify(body, req.auth_user);
+  async modify(@Body() body): Promise<string> {
+    return this.service.modify(body);
   }
 
   @ApiOperation({
@@ -55,8 +54,8 @@ export class OrderController {
     summary: '删除订单',
   })
   @Post('del')
-  async del(@Body() body, @Req() req): Promise<string> {
-    return this.service.del(body, req.auth_user);
+  async del(@Body() body): Promise<string> {
+    return this.service.del(body);
   }
 
   @ApiOperation({

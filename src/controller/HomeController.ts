@@ -1,9 +1,12 @@
+import { Controller, Get, Param, Query } from '@nestjs/common';
+import { HomeService } from '../service/HomeService';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Query } from '@nestjs/common';
 import { Goods } from '../entity/Goods';
 import { Detail } from '../entity/Detail';
-import { HomeService } from '../service/HomeService';
 
+/**
+ * 首页的控制层
+ */
 @ApiTags('首页')
 @Controller('home')
 export class HomeController {
@@ -17,6 +20,7 @@ export class HomeController {
   async queryHome(): Promise<Object> {
     return this.service.queryHome();
   }
+
   @ApiOperation({
     summary: '请求商品的数据',
   })
@@ -31,6 +35,7 @@ export class HomeController {
   async queryDetail(@Query('iid') iid: string): Promise<Detail> {
     return this.service.queryDetail(iid);
   }
+
   @ApiOperation({
     summary: '根据id查询商品',
   })
